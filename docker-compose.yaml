@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 615243
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 8080:80
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
