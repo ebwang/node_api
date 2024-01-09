@@ -18,4 +18,5 @@ const postData = async () => {
 
 for (let i = 0; i < 1000; i++) {
     postData();
+    await new Promise(r => setTimeout(r, 30000));    
 }

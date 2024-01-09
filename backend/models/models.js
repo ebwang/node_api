@@ -1,23 +1,32 @@
-import pg from 'pg';
+import { Sequelize, DataTypes } from 'sequelize';
 
-const { Client } = pg;
-
-const client = new Client({
-  user: 'postgres',
+const sequelize = new Sequelize('postgres', 'postgres', '615243', {
   host: 'db',
-  database: 'postgres',
-  password: '615243',
-  port: 5432,
+  dialect: 'postgres'
 });
 
-client.connect();
+const User = sequelize.define('User', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+  },
+  age: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  }
+}, {});
 
-const createTable = async () => {
-    await client.query(`CREATE TABLE IF NOT EXISTS users
-    (id serial PRIMARY KEY, name VARCHAR (255) UNIQUE NOT NULL,
-    email VARCHAR (255) UNIQUE NOT NULL, age INT NOT NULL);`)
-};
+User.sync().then(() => {
+  console.log("User table has been successfully created, if one doesn't exist");
+})
+.catch(error => {
+  console.log('This error occured', error);
+});
 
-createTable();
-
-export default client;
+export default User;

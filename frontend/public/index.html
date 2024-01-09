@@ -2,34 +2,57 @@
 <html>
 <head>
     <title>Users</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <div id="menu">
-        <button onclick="switchPage('list')">List Users</button>
-        <button onclick="switchPage('add')">Add User</button>
-    </div>
-
-    <div id="list" class="page active">
+    
+    <!-- Your existing list users page -->
+    <div id="list">
         <h1>Users</h1>
-        <div id="users"></div>
+        <table id="users">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="pagination">
+            <button id="prevPage">Previous</button>
+            <span id="currentPage"></span>
+            <button id="nextPage">Next</button>
+        </div>
     </div>
 
-    <div id="add" class="page">
-        <h2>Add User</h2>
-        <form id="userForm">
+    
+    <!-- Your existing add user page -->
+    <div id="manage">
+        <h2>Manage User</h2>
+        <form id="manageForm">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name"><br>
             <label for="email">Email:</label><br>
             <input type="text" id="email" name="email"><br>
             <label for="age">Age:</label><br>
             <input type="number" id="age" name="age"><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Add" onclick="addUser(event)">
+            <input type="submit" value="Update" onclick="updateUser(event)">
+            <input type="submit" value="Delete" onclick="deleteUser(event)">
+            <input type="submit" value="Search" onclick="searchUser(event)">
         </form>
     </div>
 
-    <script src="js/app.js"></script>
+    <!-- Your existing scripts -->
+    <script src="js/form.js"></script>
+    <script src="js/users.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/search.js"></script>
 
+    <!-- New scripts for search, delete, and update -->
+
+    <!-- Your existing switchPage function -->
     <script>
         function switchPage(pageId) {
             document.querySelectorAll('.page').forEach(function(page) {
@@ -38,5 +61,8 @@
             document.getElementById(pageId).classList.add('active');
         }
     </script>
+
 </body>
 </html>
+
+
